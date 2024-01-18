@@ -9,7 +9,7 @@ int main( int argc, char *argv[] ) {
     printf("Time: ");
     scanf("%s" , time);
     
-    // validate user is putting in one of the two options
+    // validate if user is putting in one of the two options
 
     if (strcmp(time, "night") != 0 && strcmp(time, "day") != 0)
     {
@@ -31,7 +31,7 @@ int main( int argc, char *argv[] ) {
     printf("Age: ");
     scanf_return_value = scanf("%d", &age);
 
-    // validate the user is inputting a positive number
+    // validate if the user is inputting a positive number
     if (age < 0 || scanf_return_value != 1)
     {
         return 1;
@@ -51,7 +51,7 @@ int main( int argc, char *argv[] ) {
 
     // printf("You entered the following number: %d", age);
 
-    // cases base on what the user input
+    // cases based on what the user input
     if (strcmp(time, "night") == 0 && age >= 4 && age <= 16){
         
         printf("$12");       

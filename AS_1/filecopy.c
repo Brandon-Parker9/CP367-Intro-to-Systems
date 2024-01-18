@@ -3,7 +3,7 @@
 
 int main( int argc, char *argv[] ){
 
-    // chekc if user put in 2 arguments 
+    // check if user put in 2 arguments 
     if (argc != 3){
 
         printf("Insufficient parameters passed.");

@@ -13,10 +13,11 @@ int main( int argc, char *argv[] ) {
     int number;
     int scanf_return_value;
 
-    // ask user for number
+    // asks user for number
     printf("Please enter a value for the Pascal triangle\n");
     scanf_return_value = scanf("%d", &number);
 
+    // validate the users input
     if (number < 1 || number > 14 || scanf_return_value != 1)
     {
         printf("Invalid input. Please enter a positive Integer less than 15.\n");
