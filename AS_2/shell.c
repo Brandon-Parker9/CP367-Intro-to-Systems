@@ -8,26 +8,26 @@
 #define MAX 30
 
 int runCommand(char *commands[]){
+
     // Create a new process
     pid_t pid = fork();
 
     if (pid < 0) {
+
         // Error occurred
         fprintf(stderr, "Fork failed\n");
         return 1;
+
     } else if (pid == 0) {
-        // Child process
-        // printf("Child process executing\n");
 
         execvp(commands[0], commands);
 
         exit(EXIT_SUCCESS); 
-        // Child-specific code here
+
     } else {
-        // Parent process
-        // printf("Parent process waiting for child\n");
-        wait(NULL); // Parent process waits for the child to terminate
-        // printf("Parent process is done waiting\n");
+
+        // Parent process waits for the child to terminate
+        wait(NULL); 
     }
     return 0;
 }
@@ -49,7 +49,6 @@ int main( int argc, char *argv[] ) {
 
         // using fgets to take input from stdin
         fgets(str_buf, MAX, stdin);
-        // printf("\nstring is: %s\n", str_buf);
 
         token = strtok(str_buf, delimiters);
 
@@ -68,10 +67,6 @@ int main( int argc, char *argv[] ) {
 
             token = strtok(NULL, delimiters);
         }
-
-        // printf("commands[0]: %s\n", commands[0]);
-
-        // printf("strcmp(commands[0], q): %d\n", strcmp(commands[0], "q"));
 
         if (strcmp(commands[0], "echo") == 0)
         {
@@ -94,11 +89,11 @@ int main( int argc, char *argv[] ) {
             printf("Invalid command, please try again.\n");
         }
 
-        // Print the words
-        // printf("Commands:\n");
+ 
         for (int i = 0; i < count; i++) {
-            // printf("Command: %s\n", commands[i]);
-            free(commands[i]); // Free memory allocated for each word
+
+            // Free memory allocated for each word
+            free(commands[i]); 
         }
 
         // Free the array itself

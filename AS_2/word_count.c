@@ -32,42 +32,52 @@ int main( int argc, char *argv[] ) {
 
                 printf("Content of %s:\n\n", fileName);
 
-                char chr;
+                char chr = ' ';
                 char prevChr;
 
-                // Read character from the file
+                // Read initial character from the file
                 chr = fgetc(filePtrInput);
 
                 // Loop to read characters from the file
                 while (chr != EOF) {
+                    // Print the character
+                    printf("%c", chr);
 
-                // Print the character
-                printf("%c", chr);
-
-                if (chr == ' ')
-                {   
-                    // Increment word count if a space is encountered
-                    words++;
-
-                }else if (chr == '\n' || chr == EOF)
-                {
-                    
-                    if (prevChr != '\n')
-                    {
-                        // Increment line counts if a newline or end-of-file is encountered
-                        lines++;
+                    // Check for space to increment word count
+                    if (chr == ' ') {
                         words++;
+                    // Check for space, newline, or punctuation marks to increment word count
+                    // if (chr == ' ' || chr == '.' || chr == ',' || chr == ';' || chr == ':' || chr == '!' || chr == '?') {
+                    //     // Check if the previous character was not a word delimiter
+                    //     if (prevChr != ' ' && prevChr != '.' && prevChr != ',' && prevChr != ';' && prevChr != ':' && prevChr != '!' && prevChr != '?') {
+                    //         words++;
+                    //     }
+                    } else if (chr == '\n') {
+                        // Increment line count when a newline is encountered
+                        lines++;
+
+                        // Check if the previous character was not a newline
+                        // This indicates the end of a word
+                        if (prevChr != '\n') {
+                            words++;
+                        }
                     }
+
+                    // Store the current character for comparison in the next iteration
+                    prevChr = chr;
+
+                    // Read character from the file
+                    chr = fgetc(filePtrInput);
                 }
-                
-                // Store the current character for comparison in the next iteration
-                prevChr = chr;
 
-                // Read character from the file
-                chr = fgetc(filePtrInput);
+                // Increment line count for the last line if it's not empty
+                if (prevChr != '\n') {
+                    lines++;
+                }
 
-                } // Continue reading until end-of-file is reached
-                
+                // Close the file after reading
+                fclose(filePtrInput);
+
                 // Calculate the average number of words per line
                 average = (float) words / lines;
 
