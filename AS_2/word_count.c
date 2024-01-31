@@ -30,6 +30,8 @@ int main( int argc, char *argv[] ) {
                 printf("\n%s cannot be opened\n\n", fileName);
             }else{
 
+                words = 0;
+                lines = 0;
                 printf("Content of %s:\n\n", fileName);
 
                 char chr = ' ';
