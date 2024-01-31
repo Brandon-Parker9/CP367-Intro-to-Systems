@@ -3,57 +3,88 @@
 
 int main( int argc, char *argv[] ) {
 
-    char input;
-    int words = 0, lines = 0;
-    float average = 0.0;
-    char fileName[50];
+    char input; // Variable to store user input for menu selection
+    int words = 0, lines = 0; // Variables to count words and lines
+    float average = 0.0; // Variable to store the average number of words per line
+    char fileName[50]; // Array to store the file name entered by the user
 
     printf("This program counts the number of lines and words of a file\n");
 
+    // Main loop for the program
     while (1) {
         printf("Enter f for entering file name, q to quit: ");
         scanf(" %c", &input);
 
         if (input == 'f') {
             
+            // If the user wants to enter a file name
             printf("Enter file name: ");
-            scanf(" %s", fileName);
+            scanf("%s", fileName);
 
-            // attempted to open file
-            FILE *filePtrInput =  fopen(argv[1], "r");
+            // Attempt to open the file
+            FILE *filePtrInput =  fopen(fileName, "r");
 
-            // if failed to open file
+            // Check if the file opening was successful
             if (filePtrInput == NULL)
             {
                 printf("\n%s cannot be opened\n\n", fileName);
             }else{
 
-                // char chr;
+                printf("\nContents of %s:\n\n", fileName);
 
-                // // open output file
-                // FILE *filePtrOutput =  fopen(argv[2], "w");
+                char chr;
+                char prevChr;
 
-                // // add contents from input file to output file one character at time
-                // do {
-                // chr = fgetc(filePtrInput);
-                // fputc(chr , filePtrOutput);
+                // Loop to read characters from the file
+                do {
 
-                // } while (chr != EOF);
+                // Read character from the file
+                chr = fgetc(filePtrInput);
 
-                // fclose(filePtrInput);
-                // fclose(filePtrOutput);
+                // Print the character
+                printf("%c", chr);
 
-                printf("Number of lines of file: %d\nNumber of words of file: %d\nAverage number of words per line of file: %f\n", words, lines, average);
+                if (chr == ' ')
+                {   
+                    // Increment word count if a space is encountered
+                    words++;
+
+                }else if (chr == '\n' || chr == EOF)
+                {
+                    
+                    if (prevChr != '\n')
+                    {
+                        // Increment line counts if a newline or end-of-file is encountered
+                        lines++;
+                        words++;
+                    }
+                }
+                
+                // Store the current character for comparison in the next iteration
+                prevChr = chr;
+
+                } while (chr != EOF); // Continue reading until end-of-file is reached
+                
+                // Calculate the average number of words per line
+                average = (float) words / lines;
+
+                // Display the counts and average
+                printf("\nNumber of lines of file: %d\nNumber of words of file: %d\nAverage number of words per line of file: %.2f\n\n",  lines, words, average);
             }
 
         } else if (input == 'q') {
-            // Exit the loop if 'q' is entered
+
+            // If the user wants to quit the program
             printf("\nGood bye\n");
             break;
         } else {
-            // Handle invalid input
+
+             // If the user enters an invalid input
             printf("Invalid input. Please enter 'f' or 'q'.\n");
         }
     }
+
+    // Return 0 to indicate successful program execution
+    return 0;
 
 }
