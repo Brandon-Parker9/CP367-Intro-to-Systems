@@ -30,16 +30,16 @@ int main( int argc, char *argv[] ) {
                 printf("\n%s cannot be opened\n\n", fileName);
             }else{
 
-                printf("\nContents of %s:\n\n", fileName);
+                printf("Content of %s:\n\n", fileName);
 
                 char chr;
                 char prevChr;
 
-                // Loop to read characters from the file
-                do {
-
                 // Read character from the file
                 chr = fgetc(filePtrInput);
+
+                // Loop to read characters from the file
+                while (chr != EOF) {
 
                 // Print the character
                 printf("%c", chr);
@@ -63,19 +63,22 @@ int main( int argc, char *argv[] ) {
                 // Store the current character for comparison in the next iteration
                 prevChr = chr;
 
-                } while (chr != EOF); // Continue reading until end-of-file is reached
+                // Read character from the file
+                chr = fgetc(filePtrInput);
+
+                } // Continue reading until end-of-file is reached
                 
                 // Calculate the average number of words per line
                 average = (float) words / lines;
 
                 // Display the counts and average
-                printf("\nNumber of lines of file: %d\nNumber of words of file: %d\nAverage number of words per line of file: %.2f\n\n",  lines, words, average);
+                printf("\nNumber of lines of %s: %d\nNumber of words of %s: %d\nAverage number of words per line of %s: %.2f\n", fileName, lines, fileName, words, fileName, average);
             }
 
         } else if (input == 'q') {
 
             // If the user wants to quit the program
-            printf("\nGood bye\n");
+            printf("Good bye\n");
             break;
         } else {
 
