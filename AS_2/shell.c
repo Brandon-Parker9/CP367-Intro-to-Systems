@@ -68,6 +68,11 @@ int main( int argc, char *argv[] ) {
             token = strtok(NULL, delimiters);
         }
 
+        // Add NULL pointer at the end of the commands array
+        commands = realloc(commands, (count + 1) * sizeof(char*));
+        commands[count] = NULL;
+        
+
         if (strcmp(commands[0], "echo") == 0)
         {
             runCommand(commands);
