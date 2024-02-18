@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 int main( int argc, char *argv[] ) {
 
@@ -35,7 +36,7 @@ int main( int argc, char *argv[] ) {
                 printf("Content of %s:\n\n", fileName);
 
                 char chr = ' ';
-                char prevChr;
+                char prevChr = ' ';
 
                 // Read initial character from the file
                 chr = fgetc(filePtrInput);
@@ -60,7 +61,7 @@ int main( int argc, char *argv[] ) {
 
                         // Check if the previous character was not a newline
                         // This indicates the end of a word
-                        if (prevChr != '\n') {
+                        if (prevChr >= 33 && prevChr <= 126) {
                             words++;
                         }
                     }
@@ -70,6 +71,13 @@ int main( int argc, char *argv[] ) {
 
                     // Read character from the file
                     chr = fgetc(filePtrInput);
+                }
+
+                if(chr == EOF){
+
+                    if (prevChr >= 33 && prevChr <= 126) {
+                            words++;
+                        }
                 }
 
                 // Increment line count for the last line if it's not empty
