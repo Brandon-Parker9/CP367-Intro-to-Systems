@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# constants
 RETURN_OK=0
 RETURN_BAD=1
 
@@ -17,6 +18,7 @@ fi
 word=""
 
 echo "Array elements:"
+
 # Read the file character by character
 while IFS= read -r -n1 char; do
 
@@ -29,15 +31,17 @@ while IFS= read -r -n1 char; do
 
                 # Add the completed word to the array
                 # word_array+=("$word")
+                
+                # print word 
                 echo "$word"
                 word=""
         fi
 done < "$filename"
 
-# If there's a leftover word, add it to the array
-# if [ -n "$word" ]; then
-#     word_array+=("$word")
-# fi
+# If there's a leftover word, print it out
+if [ -n "$word" ]; then
+    echo "$word"
+fi
 
 # Print the array
 # echo "Array elements:"
