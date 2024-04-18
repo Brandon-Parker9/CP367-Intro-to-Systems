@@ -1,0 +1,17 @@
+# Do not edit the contents of this file.
+CC = gcc
+CFLAGS = -Werror -Wall -g  -std=gnu99
+LDFLAGS = -lrt -lpthread
+TARGET =  course_average
+OBJFILES =  course_average.o 
+
+all:  $(TARGET)
+
+course_average: course_average.c
+	$(CC) $(CFLAGS)  -o course_average  course_average.c ${LDFLAGS}
+
+runq1: course_average
+	./course_average sample_in_grades.txt
+
+clean: *.c
+	rm -rf course_average process_management z_creator z_terminator  *.exe *.dSYM output.txt redirected_output.txt
